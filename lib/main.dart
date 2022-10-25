@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_with_rest_api/screens/home_screen.dart';
+
+import 'features/post/iternal/application.dart';
 
 void main() {
   runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    );
-  }
 }

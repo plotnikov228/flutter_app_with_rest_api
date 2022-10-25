@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../post_bloc/post_bloc.dart';
-import '../post_bloc/post_event.dart';
-import '../post_bloc/post_state.dart';
+import '../bloc/post_bloc.dart';
+import '../bloc/post_event.dart';
+import '../bloc/post_state.dart';
+
+
+
 
 class PostsList extends StatelessWidget {
   const PostsList({Key? key}) : super(key: key);
@@ -16,7 +19,7 @@ class PostsList extends StatelessWidget {
     return BlocBuilder<PostBloc, PostState>(builder: (context, state) {
       if (state is PostEmptyState) {
         return Center(
-          child: RaisedButton(
+          child: OutlinedButton(
             child: const Text('Press to load posts'),
             onPressed: () {
               bloc.add(PostsLoadEvent());

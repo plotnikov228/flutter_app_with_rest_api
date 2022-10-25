@@ -1,4 +1,4 @@
-import '../model/post.dart';
+import '../../domain/entityes/post.dart';
 
 abstract class PostState {}
 
