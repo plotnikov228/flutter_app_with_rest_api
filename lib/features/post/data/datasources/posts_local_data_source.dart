@@ -39,6 +39,10 @@ class PostLocalDataSource {
     }
   }
 
+  Future<int> deletePosts(PostModel postModel) async =>
+      await _databaseHelper.db.delete('posts', where: 'id = ?', whereArgs: [postModel.id]);
+
+
   Future<List<PostModel>> retrievePosts() async {
     final List<Map<String, Object?>> queryResult = await db.query('posts');
     return queryResult.map((e) => PostModel.fromJson(e)).toList();
