@@ -17,8 +17,7 @@ class HomeScreen extends StatelessWidget {
     PostRepositoryImpl postRepositoryImpl = PostRepositoryImpl(postsDataSource: PostsDataSource(), postLocalDataSource: PostLocalDataSource());
     GetPostList getPostList = GetPostList(postRepositoryImpl);
     return BlocProvider(
-          create: (BuildContext context) => PostBloc(PostEmptyState, getPostList: getPostList,
-             ),
+          create: (BuildContext context) => PostBloc(PostEmptyState),
           child: Scaffold(
               appBar: AppBar(
                 title: const Text('Posts'),
