@@ -20,7 +20,7 @@ class PostLocalDataSource {
       join(await getDatabasesPath(), 'users_demo.db'),
       onCreate: (database, version) async {
         await database.execute(
-          'CREATE TABLE dishes (userId INTEGER PRIMARY KEY, id INTEGER NOT NULL, title TEXT NOT NULL, body TEXT NULL)',
+          'CREATE TABLE posts (userId INTEGER PRIMARY KEY, id INTEGER NOT NULL, title TEXT NOT NULL, body TEXT NULL)',
         );
       },
       version: 1,
@@ -32,11 +32,10 @@ class PostLocalDataSource {
     return result;
   }
 
-  Future updatePosts(List<PostModel> postModelList) async {
-    for (int i = 1; i <= postModelList.length; i++) {
-      return await _databaseHelper.db.update("posts", postModelList[i].toJson(),
-          where: "id = ?", whereArgs: [postModelList[i].id]);
-    }
+  Future<int> updatePosts(PostModel postModel) async {
+      return await _databaseHelper.db.update("posts", postModel.toJson(),
+          where: "id = ?", whereArgs: [postModel.id]);
+
   }
 
   Future<int> deletePosts(PostModel postModel) async =>
