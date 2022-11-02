@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_with_rest_api/features/post/data/datasources/posts_local_data_source.dart';
-import 'package:flutter_app_with_rest_api/features/post/data/datasources/posts_remote_data_source.dart';
-import 'package:flutter_app_with_rest_api/features/post/data/repositories/post_repository.dart';
+import 'package:flutter_app_with_rest_api/features/post/presentation/bloc/post_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/datasources/connection_info.dart';
 import '../../domain/usecase/get_post_list.dart';
 import '../bloc/post_bloc.dart';
 import '../bloc/post_state.dart';
@@ -15,10 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PostRepositoryImpl postRepositoryImpl = PostRepositoryImpl(postsDataSource: PostsDataSource(), postLocalDataSource: PostLocalDataSource(), connectionInfo: ConnectionInfo());
-    GetPostList getPostList = GetPostList(postRepositoryImpl);
     return BlocProvider(
-          create: (BuildContext context) => PostBloc(PostEmptyState),
+          create: (BuildContext context) => PostBloc(PostEmptyState)..add(PostsLoadEvent()),
           child: Scaffold(
               appBar: AppBar(
                 title: const Text('Posts'),

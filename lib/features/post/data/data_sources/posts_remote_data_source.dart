@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_app_with_rest_api/features/post/data/models/post_model.dart';
 import 'package:http/http.dart' as http;
 
-class PostsDataSource {
+class PostsRemoteDataSource {
   Future <List<PostModel>> getPosts() async {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
 

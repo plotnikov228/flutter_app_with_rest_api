@@ -1,20 +1,25 @@
-import 'package:flutter_app_with_rest_api/features/post/data/datasources/posts_local_data_source.dart';
 import 'package:flutter_app_with_rest_api/features/post/data/models/post_model.dart';
 import 'package:flutter_app_with_rest_api/features/post/domain/entityes/post.dart';
+import 'package:flutter_app_with_rest_api/features/post/domain/entityes/user.dart';
 import 'package:flutter_app_with_rest_api/features/post/domain/repositories/post_repository.dart';
-import 'package:flutter_app_with_rest_api/features/post/data/datasources/posts_remote_data_source.dart';
 
-import '../datasources/connection_info.dart';
+import '../data_sources/connection_info.dart';
+import '../data_sources/posts_local_data_source.dart';
+import '../data_sources/users_remote_data_source.dart';
+import '../data_sources/posts_remote_data_source.dart';
+
 
 class PostRepositoryImpl implements PostRepository {
-  final PostsDataSource postsDataSource;
+  final PostsRemoteDataSource postsDataSource;
   final PostLocalDataSource postLocalDataSource;
   final ConnectionInfo connectionInfo;
+  final UsersRemoteDataSource usersRemoteDataSource;
 
   PostRepositoryImpl({
     required this.postsDataSource,
     required this.postLocalDataSource,
     required this.connectionInfo,
+    required this.usersRemoteDataSource,
   });
 
   @override
@@ -41,5 +46,10 @@ class PostRepositoryImpl implements PostRepository {
       print('connection is ${connectionInfo.connectionState}');
       return await postLocalDataSource.retrievePosts();
     }
+  }
+
+  @override
+  Future<UserModel> getUser() {
+      return usersRemoteDataSource.getUser();
   }
 }
